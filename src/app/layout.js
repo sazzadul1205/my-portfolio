@@ -19,9 +19,9 @@ export const metadata = {
   description: "Sazzadul Islam Molla Portfolio",
   keywords: ["Next.js", "React", "web development", "JavaScript"],
   icons: {
-    icon: "/icon.png", // Default favicon
-    shortcut: "/icon.png", // Shortcut icon for browsers
-    apple: "/icon.png", // Apple touch icon
+    icon: "/icon.ico", // Default favicon
+    shortcut: "/icon.ico", // Shortcut icon for browsers
+    apple: "/icon.ico", // Apple touch icon
   },
 };
 
