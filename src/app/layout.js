@@ -17,6 +17,9 @@ const geistMono = localFont({
 export const metadata = {
   title: "Sazzadul Islam Molla Portfolio",
   description: "Sazzadul Islam Molla Portfolio",
+  keywords: [
+    "Next.js, React, web development, JavaScript, frontend development",
+  ],
 };
 
 export default function RootLayout({ children }) {

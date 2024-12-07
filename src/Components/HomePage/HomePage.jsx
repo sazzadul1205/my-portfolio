@@ -100,7 +100,7 @@ const HomePage = () => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 bg-blue-500 text-white shadow-lg hover:bg-blue-600 transition duration-300 z-50"
+          className="fixed bottom-3 md:bottom-8 right-1 md:right-8 p-4 bg-blue-500 text-white shadow-lg hover:bg-blue-600 transition duration-300 z-50"
         >
           ↑
         </button>

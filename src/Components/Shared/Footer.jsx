@@ -9,8 +9,8 @@ const Footer = () => {
     <footer className="footer bg-primary text-primary-content justify-between items-center p-6 sm:px-16 lg:px-52 gap-4">
       {/* Branding Section */}
       <aside className="text-center sm:text-left">
-        <p className="text-lg font-bold">Sazzadul Islam Molla</p>
-        <p className="text-sm">
+        <p className="text-lg font-bold text-white">Sazzadul Islam Molla</p>
+        <p className="text-sm text-white">
           Copyright © {new Date().getFullYear()} - All rights reserved
         </p>
       </aside>
