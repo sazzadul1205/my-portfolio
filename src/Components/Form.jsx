@@ -58,7 +58,7 @@ const Form = () => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8 w-1/2">
+    <div className="bg-white shadow-lg rounded-lg p-8 w-full ">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Name Input */}
         <div>

@@ -1,31 +1,13 @@
 "use client";
 
-import { getProjects } from "@/Services/getProjects";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaGithub, FaLink } from "react-icons/fa";
 import { GoVersions } from "react-icons/go";
-import Load from "../Load/Load";
 
-const ProjectsSection = () => {
-  const [projects, setProjects] = useState([]);
+const ProjectsSection = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading state
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const Projects = await getProjects();
-        setProjects(Projects);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setLoading(false); // Set loading to false after data is fetched
-      }
-    };
-    fetchProjects();
-  }, []);
 
   const sortedProjects = projects.sort((a, b) => {
     const dateA = new Date(a.updatedDate.split("-").reverse().join("-")); // Convert "DD-MM-YYYY" to "YYYY-MM-DD"
@@ -36,14 +18,6 @@ const ProjectsSection = () => {
   const handleModalClose = () => {
     setSelectedProject(null);
   };
-
-  if (loading) {
-    return (
-      <div className="bg-gradient-to-tr from-blue-500 to-purple-600 text-white min-h-screen flex justify-center items-center">
-        <Load />
-      </div>
-    );
-  }
 
   return (
     <section className="bg-gradient-to-bl from-purple-600 to-blue-500 text-slate-200 py-24">

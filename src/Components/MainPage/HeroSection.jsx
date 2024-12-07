@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,55 +11,13 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { getHeroData } from "@/Services/getHeroData";
-import { getSocial } from "@/Services/getSocial";
-import Load from "../Load/Load";
 
-const HeroSection = () => {
-  const [hero, setHero] = useState(null);
-  const [socialLinks, setSocialLinks] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const HeroData = await getHeroData();
-        const SocialData = await getSocial();
-
-        setHero(HeroData[0]);
-        setSocialLinks(SocialData[0]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="bg-gradient-to-tr from-blue-500 to-purple-600 text-white min-h-screen flex justify-center items-center">
-        <Load />
-      </div>
-    );
-  }
-
-  if (!hero || !socialLinks) {
-    return (
-      <div className="bg-gradient-to-tr from-blue-500 to-purple-600 text-white min-h-screen flex justify-center items-center">
-        <p className="text-xl font-semibold">
-          Failed to load data. Please try again later.
-        </p>
-      </div>
-    );
-  }
-
+const HeroSection = ({ hero, socialLinks }) => {
   return (
     <section className="bg-gradient-to-tr from-blue-500 to-purple-600 text-white">
-      <div className="mx-auto max-w-[1200px] flex flex-row items-center gap-5 py-56 justify-between">
-        <div className="w-[350px] h-[350px] overflow-hidden border-4 border-white">
+      <div className="mx-auto max-w-[1200px] flex flex-col md:flex-row items-center gap-5 pt-[150px] md:pt-[250px] md:py-[250px] justify-between">
+        {/* Profile Image */}
+        <div className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] overflow-hidden border-4 border-white mb-6 md:mb-0">
           <Image
             src={hero.profileImage}
             alt={hero.name}
@@ -68,10 +26,13 @@ const HeroSection = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="text-right">
-          <h1 className="text-4xl font-bold mt-6">Hello,</h1>
-          <h2 className="text-4xl font-bold mt-6">{hero.name}</h2>
-          <h3 className="text-xl font-medium mt-2">
+
+        {/* Text Section */}
+        <div className="text-center md:text-right">
+          <p className="text-3xl md:text-4xl font-bold">Hello,</p>
+          <p className="text-3xl md:text-3xl font-bold">My Name Is,</p>
+          <h2 className="text-3xl md:text-4xl font-bold mt-6">{hero.name}</h2>
+          <h3 className="text-lg md:text-xl font-medium mt-2">
             <span>I am a </span>
             <span>
               <Typewriter
@@ -85,19 +46,21 @@ const HeroSection = () => {
               />
             </span>
           </h3>
-          <p className="text-lg mt-4 max-w-2xl leading-relaxed">
+          <p className="text-base md:text-lg mt-4 max-w-xl mx-auto md:max-w-2xl leading-relaxed">
             {hero.tagline}
           </p>
-          <div className="mt-6 flex space-x-4 justify-end">
+          <div className="mt-6 flex flex-col md:flex-row gap-4 justify-center md:justify-end">
+            {/* Resume Button */}
             <a
               href={hero.resumeLink}
-              className="bg-transparent border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition items-center gap-5 flex font-semibold"
+              className="bg-transparent border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition items-center gap-5 flex font-semibold mx-auto md:mx-0"
               download
             >
               <FaArrowLeft />
               <span>View My Resume</span>
             </a>
-            <nav className="flex gap-2 mt-4 sm:mt-0">
+            {/* Social Links */}
+            <nav className="flex gap-4 mt-4 sm:mt-0 justify-center">
               <Link
                 href={socialLinks.google}
                 className="text-xl hover:scale-125 transition-transform transform bg-white p-3 rounded-full"

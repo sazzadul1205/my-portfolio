@@ -1,12 +1,29 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+
+import { useState, useEffect } from "react";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
+      // Check which section is in view and update the active section
+      const sections = ["hero", "about", "projects", "contact"];
+      const offset = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const sectionElement = document.getElementById(section);
+        if (
+          sectionElement &&
+          offset >= sectionElement.offsetTop &&
+          offset < sectionElement.offsetTop + sectionElement.clientHeight
+        ) {
+          setActiveSection(section);
+        }
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -15,79 +32,51 @@ const Navbar = () => {
     };
   }, []);
 
-  // Example dropdown menu items
-  const dropdownItems = [
-    { id: 1, label: "Link 1", href: "/link1" },
-    { id: 2, label: "Link 2", href: "/link2" },
-  ];
-
   return (
     <div
-      className={`navbar fixed top-0 w-full transition-all duration-300 px-8 sm:px-16 lg:px-52 z-30 ${
+      className={`navbar fixed flex-col md:flex-row top-0 w-full transition-all duration-300 px-8 sm:px-16 lg:px-52 z-30 py-5 ${
         isScrolled ? "bg-primary shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="flex-1">
         <a className="font-semibold text-xl">Sazzadul Islam Molla</a>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1 items-center gap-5">
-          <li>
-            <Dropdown items={dropdownItems} title="Parent" />
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              value="synthwave"
-              className="toggle theme-controller col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:theme(colors.sky.500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:theme(colors.blue.900)]"
-            />
-          </li>
-        </ul>
+      <div className="flex-none mt-4 md:mt-0">
+        <div className="relative flex gap-5">
+          <a
+            href="#hero"
+            className={`hover:text-blue-200 font-semibold md:font-bold ${
+              activeSection === "hero" ? "active-sparkle" : ""
+            }`}
+          >
+            Hero
+          </a>
+          <a
+            href="#about"
+            className={`hover:text-blue-200 font-semibold md:font-bold ${
+              activeSection === "about" ? "active-sparkle" : ""
+            }`}
+          >
+            About
+          </a>
+          <a
+            href="#projects"
+            className={`hover:text-blue-200 font-semibold md:font-bold ${
+              activeSection === "projects" ? "active-sparkle" : ""
+            }`}
+          >
+            Projects
+          </a>
+          <a
+            href="#contact"
+            className={`hover:text-blue-200 font-semibold md:font-bold ${
+              activeSection === "contact" ? "active-sparkle" : ""
+            }`}
+          >
+            Contact
+          </a>
+        </div>
       </div>
-    </div>
-  );
-};
-
-const Dropdown = ({ items, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  // Toggle dropdown
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
-
-  // Close dropdown when clicking outside
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  return (
-    <div ref={dropdownRef} className="relative">
-      <summary
-        tabIndex={0}
-        role="button"
-        onClick={toggleDropdown}
-        className="cursor-pointer"
-      >
-        {title}
-      </summary>
-      {isOpen && (
-        <ul className="absolute bg-blue-400 rounded-none p-2 w-52 z-50 shadow dropdown-content mt-36">
-          {items.map((item) => (
-            <li key={item.id} className="hover:bg-blue-700 font-semibold">
-              <a href={item.href}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };
