@@ -17,9 +17,12 @@ const geistMono = localFont({
 export const metadata = {
   title: "Sazzadul Islam Molla Portfolio",
   description: "Sazzadul Islam Molla Portfolio",
-  keywords: [
-    "Next.js, React, web development, JavaScript, frontend development",
-  ],
+  keywords: ["Next.js", "React", "web development", "JavaScript"],
+  icons: {
+    icon: "/icon.png", // Default favicon
+    shortcut: "/icon.png", // Shortcut icon for browsers
+    apple: "/icon.png", // Apple touch icon
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -28,9 +31,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar></Navbar>
+        <Navbar />
         <main>{children}</main>
-        <Footer></Footer>
+        <Footer />
       </body>
     </html>
   );
