@@ -17,7 +17,7 @@ const geistMono = localFont({
 export const metadata = {
   title: "Sazzadul Islam Molla Portfolio",
   description: "Sazzadul Islam Molla Portfolio",
-  keywords: ["Next.js", "React", "web development", "JavaScript"],
+  keywords: ["Sazzadul Islam Molla", "Sazzadul Islam" ,"NextJS Developer", "ReactJS Developer", "FullStack development", "MERNStack Developer", "NodeJS Developer", "Backend Developer"],
   icons: {
     icon: "/icon.ico", // Default favicon
     shortcut: "/icon.ico", // Shortcut icon for browsers
