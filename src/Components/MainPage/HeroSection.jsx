@@ -56,7 +56,6 @@ const HeroSection = ({ hero, socialLinks }) => {
               className="bg-transparent border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition items-center gap-5 flex font-semibold mx-auto md:mx-0"
               download
             >
-              Download My Resume
               <FaArrowLeft />
               <span>View My Resume</span>
             </a>
